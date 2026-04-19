@@ -1,31 +1,39 @@
-# A transformer model predicting transcription factor effects from DNA sequence:
+# A transformer model predicting transcription factors vs background DNA:
 
-Predicting transcription factor (TF) binding sites from DNA sequence is an important task in computational genomics since regulatory proteins bind specific DNA sequence motifs that govern gene expression. While some binding sites are uniquely identifiable through known motifs, long distance dependencies and sequence variations make accurate TF binding site prediction challenging.  
+This project implements a transformer-based model named DNABERT to predict whether a given DNA sequence contains a transcription factor binding site. Traditional binding site search algorithms rely on fixed sequence patterns that cannot capture the contextual and combinatorial nature of transcription factor binding and cannot track  interactions between distant genomic regions. While some binding sites are uniquely identifiable through known motifs, long distance dependencies and sequence variations make accurate transcription factor binding site prediction challenging.  
   
-Traditional binding site search algorithms rely on fixed sequence patterns that cannot capture the contextual and combinatorial nature of TF binding nor interactions between distant genomic regions. Transformer models, however, offer a better approach to this problem. Transformer can learn sequence dependencies and binding site interactions directly from the data, modeling long-distance effects, sequence context and variant sensitivity.  
+Transformers can learn sequence dependencies and binding site interactions directly from the data, modeling long-distance effects, sequence context and variant sensitivity. Successful transcription factor prediction has broad research implications including improved accuracy over traditional models and uncovering novel biological insights from data.  
   
-This project will implement a transformer-based deep learning model in TensorFlow to predict whether a given DNA sequence contains a transcription factor binding site. Genomic training will be obtained from the ENCODE Project using ChIP-seq experiments. It provides both genomic regions with TFs binding sites and regions without observed binding.  
+For this project, genomic sequence data was obtained from the Encode Project using ChIP-seq experiments. Sequences were then extracted from the hg38 genome. This included background genomic sequences deemed non-binding.  
   
-DNA sequences will be converted into k-mer tokens so the model can learn biologically meaningful motifs and relationships between nearby and distant nucleotides. Labels will be binary: 1, if a binding site is present, and 0, if the sequence represents a background genomic region. Training will use a transformer encoder architecture inspired by DNABERT where tokenized sequences are embedded then processed through self-attention layers, followed by a final sigmoid output node that predicts binding probability. Model performance will be evaluated using ROC-AUC, precision and recall metrics to quantify classification quality.  
+DNA sequences of 3 transcription factors (CTCF, MAX and YY1) were converted into k-mer tokens to help the model learn biologically meaningful motifs and relationships between nearby and distant nucleotides using its attention mechanism.   
   
-Once trained, the model will be used to compare predictions between reference and mutated sequences to observe how small sequence changes affect predicted binding likelihood. Where: changeInScore = sequencePredictionScore - mutatedSequencePredictionScore.  
+Model performance was tested using accuracy, precision, recall and F1 scores across categories to quantify classification quality.  
   
-In summary, the transformer model will process the tokenized DNA sequences using
-self-attention to capture sequence context and identify patterns associated with TF binding sites, classifying genomic regions as binding or non-binding. The project will demonstrate how transformer architectures can be applied to genomic data and provide practical experience building deep learning models for computational genomics.
-
 # Data Sources:
 * https://www.encodeproject.org/
-    * Using hg38 genome.
-    * Good for individual TF binding sites.
-* https://jaspar.elixir.no/
-* https://www.internationalgenome.org/
-* https://kipoi.org/models/DeepSEA/
-
-# Identified Challenge(s):
-Preliminary data set exploration underlines the need for, and potential challenges with, a .bed file sequence extraction and labeling pipeline that generates ample labeled data to train the model.
-
-# Stretch Goal:
-Productize via React.js front end and host on Render. As of 3/13 this is unlikely to happen simply because it's unnecessary for the project's success and offers little lessons to learn.
+    * For individual TF binding sites.
+* hg38 human genome.
+  
+# Tools & Techniques:
+* HuggingFace, PyTorch, Pandas
+* Model: “zhihan1996/DNA_bert_6”
+  
+# Results:
+![eval1](images/eval1.png)
+![eval2](images/eval2.png)
+![matrix](images/matrix.png)
+![test](images/test.png)
+  
+# Challenges & Lessons Learned:
+* The biggest challenge was working with training times and Colab timing out. 
+* With more time, I would experiment tuning the model more, diving further into the details to see what impacts performance scores.
+* Using Pytorch for the first time wasn’t bad since the same concepts apply as other ML libraries.  
+  
+# Conclusions & Future Work:
+* I’m satisfied with the model’s performance. Though, without a benchmark to compare it to, I’m curious if this is an improvement vs. other ML approaches for transcription factor binding site predictions.
+* It would be interesting to dive deeper into the nature of the 3 transcription factors binding sites, what makes then unique or similar, and why YY1 was being mis-predicted as much as it was.
+* It would be great to revisit transformer architectures and papers, dive deeper into the math behind DNABERT and similar models, understand the self-attention mechanism at the finest level and how it applies to the genomics domain.  
   
 # Bibliography:
   
