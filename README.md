@@ -1,4 +1,4 @@
-# A transformer model predicting transcription factors vs background DNA:
+# A transformer model predicting transcription factor binding sites vs background DNA:
 
 This project implements a transformer-based model named DNABERT to predict whether a given DNA sequence contains a transcription factor binding site. Traditional binding site search algorithms rely on fixed sequence patterns that cannot capture the contextual and combinatorial nature of transcription factor binding and cannot track  interactions between distant genomic regions. While some binding sites are uniquely identifiable through known motifs, long distance dependencies and sequence variations make accurate transcription factor binding site prediction challenging.  
   
