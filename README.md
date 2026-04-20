@@ -18,22 +18,35 @@ Model performance was tested using accuracy, precision, recall and F1 scores acr
 # Tools & Techniques:
 * HuggingFace, PyTorch, Pandas
 * Model: “zhihan1996/DNA_bert_6”
+* Model: “zhihan1996/DNA_bert_3"
   
 # Results:
-![eval1](images/eval1.png)
-![eval2](images/eval2.png)
-![matrix](images/matrix.png)
-![test](images/test.png)
+* Model 2 Confusion Matrix with 6-mer, 5 epochs:
+![matrix1](images/matrix1.png)
+* Model 3 Confusion Matrix with 3-mer, 5 epochs:
+![matrix2](images/matrix2.png)
+* Overall results:
+![results](images/results.png)
   
 # Challenges & Lessons Learned:
-* The biggest challenge was working with training times and Colab timing out. 
-* With more time, I would experiment tuning the model more, diving further into the details to see what impacts performance scores.
-* Using Pytorch for the first time wasn’t bad since the same concepts apply as other ML libraries.  
+* The current challenge remaining is getting better results which would take a deeper dive into the biology, the sequences and the options available for tuning the model.
+* Working with training times and Colab timing out was challenging at times.
+* Using Pytorch for the first time went well since the same concepts apply as other ML libraries and the syntax is very straight forward.  
   
-# Conclusions & Future Work:
+# Conclusions:
 * I’m satisfied with the model’s performance. Though, without a benchmark to compare it to, I’m curious if this is an improvement vs. other ML approaches for transcription factor binding site predictions.
-* It would be interesting to dive deeper into the nature of the 3 transcription factors binding sites, what makes then unique or similar, and why YY1 was being mis-predicted as much as it was.
-* It would be great to revisit transformer architectures and papers, dive deeper into the math behind DNABERT and similar models, understand the self-attention mechanism at the finest level and how it applies to the genomics domain.  
+* More epochs mean better scores, but there is evidence of overfitting given the epochs yielded non-linear results.
+* Longer k-mers seem to improve models scores; was there a correlation with sequence length?  
+  
+# Future Work:
+* Starting with the biology, a deeper dive into the nature of the 3 transcription factors, what makes them unique or similar, and why was YY1 being mis-predicted as much as it was. 
+* Is YY1’s sequence less conserved than say the highly conserved CTCF?
+* How does sequence length impact scores?  and/or how can more distant genomic interactions be better modeled?
+* How does training data size impact scores?
+* How does fine tuning sequence quality filters impact scores?
+* How would longer k-mers impact scores?
+* Understand why the epochs yielded non-linear results.
+* It would be great to revisit transformer architectures and papers, to dive deeper into the math behind DNABERT and similar models, understand self-attention at the finest level as well as how it applies to the genomics domain.  
   
 # Bibliography:
   
